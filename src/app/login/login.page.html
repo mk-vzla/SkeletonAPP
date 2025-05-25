@@ -14,14 +14,14 @@
   <br>
   <ion-list>
     <ion-item>
-      <ion-input label="Email: " type="email" placeholder=""></ion-input>
+      <ion-input label="Email: " [(ngModel)]="email" type="email" placeholder=""></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input label="Password: " type="password" value=""></ion-input>
+      <ion-input label="Password: " [(ngModel)]="password" type="password" value=""></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-button color="tertiary" id="present-alert" expand="block" fill="outline">Conectarse</ion-button>
+  <ion-button [disabled]="!email || !password" color="tertiary" id="present-alert" expand="block" fill="outline">Conectarse</ion-button>
   <ion-alert trigger="present-alert" class="custom-alert" header="Seguro que desea conectarse?" [buttons]="alertaConexion"></ion-alert>
 
 </ion-content>

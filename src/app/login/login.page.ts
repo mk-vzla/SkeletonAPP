@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class LoginPage implements OnInit {
+
+    email: string = '';
+    password: string = '';
+
+
   public alertaConexion = [
     {
-      text: 'No',
+      text: 'Nopiti',
       cssClass: 'alert-button-cancel',
       handler: () => {
         this.noConectarseLogin();
@@ -17,7 +22,7 @@ export class LoginPage implements OnInit {
       }
     },
     {
-      text: 'Yes',
+      text: 'Sipiti',
       cssClass: 'alert-button-confirm',
       handler: () => {
         this.conectarseLogin();
@@ -29,7 +34,7 @@ export class LoginPage implements OnInit {
   constructor() { }
 
   conectarseLogin() {
-    console.log('CONECTANDO, MOSTRANDO EN CONSOLA');
+    console.log('CONECTANDO:', this.email);
   }
   noConectarseLogin() {
     console.log('NO CONECTANDO, MOSTRANDO EN CONSOLA');
