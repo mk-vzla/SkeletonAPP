@@ -1,15 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar color="light">
     <ion-title>
-      Inicio
+      SkeletonAPP
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Inicio</ion-title>
+      <ion-title size="large">SkeletonAPP</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -30,25 +30,32 @@
 
     <mat-form-field>
       <mat-label>Nombre</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="nombre" name="nombre">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Apellido</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="apellido" name="apellido">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Nivel Educación</mat-label>
-      <mat-select>
-        <mat-option value="one">Escuela</mat-option>
-        <mat-option value="two">Bachillerato</mat-option>
-        <mat-option value="two">Universitario</mat-option>
-        <mat-option value="two">N/A</mat-option>
+      <mat-select [(ngModel)]="nivelEducacion" name="nivelEducacion">
+      <mat-option value="one">Escuela</mat-option>
+      <mat-option value="two">Bachillerato</mat-option>
+      <mat-option value="three">Universitario</mat-option>
+      <mat-option value="na">N/A</mat-option>
       </mat-select>
     </mat-form-field>
-    
+
+    <mat-form-field>
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" [max]="today" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <mat-card-actions>
       <div class="fila-de-botones">
-        <button mat-stroked-button color="accent">Mostrar</button>
+        <button mat-stroked-button color="accent" (click)="mostrar()">Mostrar</button>
         <button mat-stroked-button color="primary">Limpiar</button>
       </div>
     </mat-card-actions>
@@ -61,3 +68,10 @@
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div> -->
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title size="small">App desarrollada por MK</ion-title>
+  </ion-toolbar>
+</ion-footer>
