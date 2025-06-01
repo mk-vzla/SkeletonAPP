@@ -17,6 +17,44 @@
     Ir al Login
   </ion-button>
 
+  <mat-card class="la-tarjeta" appearance="outlined">
+    <mat-card-title class="titulo-centrado">¡Bienvenido!</mat-card-title>
+    <mat-card-subtitle class="usuario-izquierda">Usuario: {{ email }}</mat-card-subtitle>
+
+
+
+    <mat-card-content>
+      <h3>Información Adicional</h3>
+    </mat-card-content>
+
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nivel Educación</mat-label>
+      <mat-select>
+        <mat-option value="one">Escuela</mat-option>
+        <mat-option value="two">Bachillerato</mat-option>
+        <mat-option value="two">Universitario</mat-option>
+        <mat-option value="two">N/A</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-card-actions>
+      <div class="fila-de-botones">
+        <button mat-stroked-button color="accent">Mostrar</button>
+        <button mat-stroked-button color="primary">Limpiar</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+
 
   <!-- <div id="container">
     <strong>Ready to create an app?</strong>

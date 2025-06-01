@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  email: string = '';
+
+  constructor(private router: Router) {
+    const nav = this.router.getCurrentNavigation();
+    if (nav?.extras?.state && nav.extras.state['email']) {
+      this.email = nav.extras.state['email'];
+    }
+  }
 
 }
