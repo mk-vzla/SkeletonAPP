@@ -13,36 +13,31 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button expand="block" routerLink="/login">
-    Ir al Login
-  </ion-button>
-
   <mat-card class="la-tarjeta" appearance="outlined">
     <mat-card-title class="titulo-centrado">¡Bienvenido!</mat-card-title>
     <mat-card-subtitle class="usuario-izquierda">Usuario: {{ email }}</mat-card-subtitle>
-
-
 
     <mat-card-content>
       <h3>Información Adicional</h3>
     </mat-card-content>
 
-
-    <mat-form-field>
+    <mat-form-field [ngClass]="{'shake': animarNombre}">
       <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="nombre" name="nombre">
+      <input matInput [(ngModel)]="nombre" name="nombre" #nombreInput>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field [ngClass]="{'shake': animarApellido}">
       <mat-label>Apellido</mat-label>
-      <input matInput [(ngModel)]="apellido" name="apellido">
+      <input matInput [(ngModel)]="apellido" name="apellido" #apellidoInput>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Nivel Educación</mat-label>
       <mat-select [(ngModel)]="nivelEducacion" name="nivelEducacion">
-      <mat-option value="one">Escuela</mat-option>
-      <mat-option value="two">Bachillerato</mat-option>
-      <mat-option value="three">Universitario</mat-option>
-      <mat-option value="na">N/A</mat-option>
+        <mat-option value="one">Escuela</mat-option>
+        <mat-option value="two">Bachillerato</mat-option>
+        <mat-option value="three">Universitario</mat-option>
+        <mat-option value="na">N/A</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -56,7 +51,7 @@
     <mat-card-actions>
       <div class="fila-de-botones">
         <button mat-stroked-button color="accent" (click)="mostrar()">Mostrar</button>
-        <button mat-stroked-button color="primary">Limpiar</button>
+        <button mat-stroked-button color="primary" (click)="limpiar()">Limpiar</button>
       </div>
     </mat-card-actions>
   </mat-card>
