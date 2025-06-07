@@ -1,21 +1,16 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar color="light">
-    <ion-title>
-      SkeletonAPP
-    </ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <app-nombre-compania [nombreCompania]="'SkeletonAPP'"></app-nombre-compania>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">SkeletonAPP</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <mat-card class="la-tarjeta" appearance="outlined">
     <mat-card-title class="titulo-centrado">¡Bienvenido!</mat-card-title>
-    <mat-card-subtitle class="usuario-izquierda">Usuario: {{ email }}</mat-card-subtitle>
+    <mat-card-subtitle class="usuario-izquierda">Usuario: {{ usuario.email }}</mat-card-subtitle>
 
     <mat-card-content>
       <h3>Información Adicional</h3>
@@ -23,17 +18,17 @@
 
     <mat-form-field [ngClass]="{'shake': animarNombre}">
       <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="nombre" name="nombre" #nombreInput>
+      <input matInput [(ngModel)]="usuario.nombre" name="nombre" #nombreInput>
     </mat-form-field>
 
     <mat-form-field [ngClass]="{'shake': animarApellido}">
       <mat-label>Apellido</mat-label>
-      <input matInput [(ngModel)]="apellido" name="apellido" #apellidoInput>
+      <input matInput [(ngModel)]="usuario.apellido" name="apellido" #apellidoInput>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Nivel Educación</mat-label>
-      <mat-select [(ngModel)]="nivelEducacion" name="nivelEducacion">
+      <mat-select [(ngModel)]="usuario.nivelEducacion" name="nivelEducacion">
         <mat-option value="one">Escuela</mat-option>
         <mat-option value="two">Bachillerato</mat-option>
         <mat-option value="three">Universitario</mat-option>
@@ -43,7 +38,7 @@
 
     <mat-form-field>
       <mat-label>Fecha de Nacimiento</mat-label>
-      <input matInput [matDatepicker]="picker" [max]="today" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+      <input matInput [matDatepicker]="picker" [max]="today" [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -55,18 +50,15 @@
       </div>
     </mat-card-actions>
   </mat-card>
-
-
-
-  <!-- <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div> -->
 </ion-content>
-
 
 <ion-footer>
   <ion-toolbar>
     <ion-title size="small">App desarrollada por MK</ion-title>
   </ion-toolbar>
 </ion-footer>
+
+  <!-- <div id="container">
+    <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div> -->

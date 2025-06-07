@@ -1,0 +1,23 @@
+// header.centrar-titulo {
+//   position: absolute;
+//   left: 50%;
+//   top: 50%;
+//   transform: translate(-50%, -50%);
+//   color: #e62ed3 !important;
+//   font-weight: bold;
+//   font-size: 24px;
+//   margin: 0;
+//   width: max-content;
+//   pointer-events: none; // Opcional: evita que el título bloquee clicks en botones
+// }
+
+
+.centrar-titulo {
+  text-align: center;
+  width: 100%;
+  color: #a238a6;
+  font-weight: bold;
+  margin-left: 0 !important;
+  display: block;
+  position: relative;
+}

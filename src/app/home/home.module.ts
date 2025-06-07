@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+import { NombreCompaniaComponent } from '../components/nombre-compania/nombre-compania/nombre-compania.component';
 
 
 
@@ -36,7 +37,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDividerModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NombreCompaniaComponent
   ],
   declarations: [HomePage]
 })

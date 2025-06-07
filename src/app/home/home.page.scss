@@ -1,8 +1,34 @@
-ion-title {
-    color: rgb(203, 54, 226);
+ion-toolbar {
+  --background: #fff !important;
+  background: #fff !important;
+  color: #222 !important; /* texto oscuro */
+  position: relative;
 }
+
+ion-title.centrar-titulo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #e62ed3 !important;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+  width: max-content;
+  pointer-events: none; // Opcional: evita que el título bloquee clicks en botones
+}
+
 .icono-principio {
 color: rgb(203, 54, 226);
+}
+
+.centrar-titulo {
+  text-align: center;
+  width: 100%;
+  color: #000 !important;
+  font-weight: bold;
+  margin: 0 auto;
+  display: block;
 }
 
 #container {
