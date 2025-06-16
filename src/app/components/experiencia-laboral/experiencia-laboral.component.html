@@ -1,0 +1,42 @@
+<mat-card class="la-tarjeta" appearance="outlined">
+  <mat-card-title class="titulo-centrado">Experiencia Laboral</mat-card-title>
+  <mat-card-subtitle class="usuario-izquierda">Usuario: {{ usuario.username }}</mat-card-subtitle>
+
+  <mat-card-content>
+    <h3>Agregar Experiencia</h3>
+  </mat-card-content>
+
+  <mat-form-field class="un-espacio-vertical">
+    <mat-label>Cargo</mat-label>
+    <input matInput [(ngModel)]="cargo" name="cargo">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Empresa</mat-label>
+    <input matInput [(ngModel)]="empresa" name="empresa">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Año de Inicio</mat-label>
+    <input matInput type="number" [(ngModel)]="anioInicio" name="anioInicio" min="1900" max="2100" maxlength="4"
+      placeholder="Ej: 2020">
+  </mat-form-field>
+
+  <mat-slide-toggle [(ngModel)]="trabajaActualmente" name="trabajaActualmente" labelPosition="before">
+    Actualmente trabaja aquí?
+  </mat-slide-toggle>
+
+  <mat-form-field class="un-espacio-vertical" *ngIf="trabajaActualmente === false">
+    <mat-label>Año de Término</mat-label>
+    <input matInput type="number" [(ngModel)]="anioTermino" name="anioTermino" min="1900" max="2100" maxlength="4"
+      placeholder="Ej: 2023">
+  </mat-form-field>
+
+
+  <mat-card-actions>
+    <div class="fila-de-botones">
+      <button mat-stroked-button color="accent">Guardar</button>
+      <button mat-stroked-button color="primary">Limpiar</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

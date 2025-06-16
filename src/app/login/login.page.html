@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large"><ion-icon class="icono-principio" name="person-outline"></ion-icon>Login</ion-title>
@@ -14,15 +15,18 @@
   <br>
   <ion-list>
     <ion-item>
-      <ion-input label="Usuario: " [(ngModel)]="email" type="email" name="email"></ion-input>
+      <ion-input label="Username: " [(ngModel)]="username" type="email" name="username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input label="Password: " [(ngModel)]="password" type="password" name="password" ></ion-input>
+      <ion-input label="Password: " [(ngModel)]="password" type="password" name="password"></ion-input>
     </ion-item>
   </ion-list>
 
-  <!-- <ion-button [disabled]="!email || !password" color="tertiary" id="present-alert" expand="block" fill="outline">Conectarse</ion-button> -->
+
   <ion-button color="tertiary" id="present-alert" expand="block" fill="outline" (click)="conectarseLogin()">Ingresar</ion-button>
-  <!-- <ion-alert trigger="present-alert" class="custom-alert" header="Seguro que desea conectarse?" [buttons]="alertaConexion"></ion-alert> -->
-  <a href="">Crea tu cuenta gratis</a>
+
+  <ion-button expand="block" fill="clear" color="primary" routerLink="/register">
+    Crea tu cuenta gratis
+  </ion-button>
+  </ion-card>
 </ion-content>

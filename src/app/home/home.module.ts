@@ -19,7 +19,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+
 import { NombreCompaniaComponent } from '../components/nombre-compania/nombre-compania/nombre-compania.component';
+
+import { MisDatosComponent } from '../components/mis-datos/mis-datos.component';
+import { CertificacionesComponent } from '../components/certificaciones/certificaciones.component';
+import { ExperienciaLaboralComponent } from '../components/experiencia-laboral/experiencia-laboral.component';
 
 
 
@@ -38,8 +43,13 @@ import { NombreCompaniaComponent } from '../components/nombre-compania/nombre-co
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NombreCompaniaComponent
+    NombreCompaniaComponent,
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage,
+    MisDatosComponent,
+    CertificacionesComponent,
+    ExperienciaLaboralComponent
+  ]
 })
-export class HomePageModule {}
+export class HomePageModule { }

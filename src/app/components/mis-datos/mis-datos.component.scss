@@ -1,0 +1,150 @@
+ion-toolbar {
+  --background: #fff !important;
+  background: #fff !important;
+  color: #222 !important; /* texto oscuro */
+  position: relative;
+}
+
+ion-title.centrar-titulo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #e62ed3 !important;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+  width: max-content;
+  pointer-events: none; // Opcional: evita que el título bloquee clicks en botones
+}
+
+.icono-principio {
+color: rgb(203, 54, 226);
+}
+
+.centrar-titulo {
+  text-align: center;
+  width: 100%;
+  color: #000 !important;
+  font-weight: bold;
+  margin: 0 auto;
+  display: block;
+}
+
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+ion-content {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+
+.la-tarjeta {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(128, 0, 128, 0.3); // sombra morada translúcida
+  background: #fff; // fondo blanco para resaltar sombra
+  margin: 0 auto;
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(128, 0, 128, 0.4); // sombra flotante más intensa
+  }
+}
+
+.titulo-centrado {
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+  font-weight: 600;
+}
+
+.usuario-izquierda {
+  text-align: left;
+  width: 100%;
+  margin-top: 16px;
+  font-size: 16px;
+  color: #555;
+}
+
+mat-card-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+
+.fila-de-botones {
+  display: flex;
+  justify-content: center; // centra los botones horizontalmente
+  gap: 25px; // separación horizontal de 30px
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.fila-de-botones button {
+  width: auto;
+  max-width: 200px; // límite máximo para que no se deformen en pantallas grandes
+  min-width: 120px; // límite mínimo para mantener proporción en pantallas chicas
+}
+
+
+
+mat-card-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;   // Centra horizontalmente
+  align-items: center;       // Centra verticalmente (si hay altura)
+  padding: 0;
+  margin: 0;
+}
+
+mat-card-content h3 {
+  font-size: 24px;
+  text-align: center;
+  margin: 0;
+  padding: 16px 0;
+}
+
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+.shake {
+  animation: shake 1s ease-in-out;
+}

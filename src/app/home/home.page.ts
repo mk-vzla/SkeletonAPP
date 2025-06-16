@@ -8,6 +8,7 @@ import { MenuController } from '@ionic/angular';
 // Clase Usuario (puedes moverla a un archivo aparte si prefieres)
 class Usuario {
   constructor(
+    public username: string = '',
     public email: string = '',
     public nombre: string = '',
     public apellido: string = '',
@@ -28,8 +29,12 @@ export class HomePage {
 
   usuario: Usuario = new Usuario();
 
+
   animarNombre = false;
   animarApellido = false;
+
+  
+  segmentoSeleccionado = 'mis-datos';
 
   private formatearFechaPipe = new FormatearFechaPipe();
 
@@ -38,7 +43,17 @@ export class HomePage {
     if (nav?.extras?.state && nav.extras.state['email']) {
       this.usuario.email = nav.extras.state['email'];
     }
+    // Cargar username desde localStorage
+    const usernameGuardado = localStorage.getItem('username');
+    if (usernameGuardado) {
+      this.usuario.username = usernameGuardado;
+    }
+    else {
+      // Si no hay username guardado, redirigir a la página de login
+      this.router.navigate(['/login']);
+    }
   }
+
 
   async mostrarAlerta(mensaje: string) {
     const alerta = await this.alertController.create({
@@ -49,34 +64,30 @@ export class HomePage {
     await alerta.present();
   }
 
-  mostrar() {
-    if (!this.usuario.nombre || !this.usuario.apellido) {
-      this.mostrarAlerta('Por favor, complete los campos de nombre y apellido.');
-      return;
-    }
-    const nombreInitCap = this.usuario.nombre.charAt(0).toUpperCase() + this.usuario.nombre.slice(1).toLowerCase();
-    const apellidoInitCap = this.usuario.apellido.charAt(0).toUpperCase() + this.usuario.apellido.slice(1).toLowerCase();
-    const fechaFormateada = this.formatearFechaPipe.transform(this.usuario.fechaNacimiento);
-    this.mostrarAlerta('Su nombre es: ' + nombreInitCap + ' ' + apellidoInitCap + ' ' + fechaFormateada);
-  }
+  // mostrar() {
+  //   if (!this.usuario.nombre || !this.usuario.apellido) {
+  //     this.mostrarAlerta('Por favor, complete los campos de nombre y apellido.');
+  //     return;
+  //   }
+  //   const nombreInitCap = this.usuario.nombre.charAt(0).toUpperCase() + this.usuario.nombre.slice(1).toLowerCase();
+  //   const apellidoInitCap = this.usuario.apellido.charAt(0).toUpperCase() + this.usuario.apellido.slice(1).toLowerCase();
+  //   const fechaFormateada = this.formatearFechaPipe.transform(this.usuario.fechaNacimiento);
+  //   this.mostrarAlerta('Su nombre es: ' + nombreInitCap + ' ' + apellidoInitCap + ' ' + fechaFormateada);
+  // }
 
-  limpiar() {
-    this.usuario.nombre = '';
-    this.usuario.apellido = '';
+  // limpiar() {
+  //   this.usuario.nombre = '';
+  //   this.usuario.apellido = '';
 
-    // Activar animación
-    this.animarNombre = true;
-    this.animarApellido = true;
+  //   // Activar animación
+  //   this.animarNombre = true;
+  //   this.animarApellido = true;
 
-    // Quitar animación después de 1 segundo (duración del shake)
-    setTimeout(() => {
-      this.animarNombre = false;
-      this.animarApellido = false;
-    }, 1000);
-  }
-
-  
-
-
+  //   // Quitar animación después de 1 segundo (duración del shake)
+  //   setTimeout(() => {
+  //     this.animarNombre = false;
+  //     this.animarApellido = false;
+  //   }, 1000);
+  // }
 
 }

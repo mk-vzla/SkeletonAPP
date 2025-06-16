@@ -1,0 +1,38 @@
+<mat-card class="la-tarjeta" appearance="outlined">
+  <mat-card-title class="titulo-centrado">Certificaciones</mat-card-title>
+  <mat-card-subtitle class="usuario-izquierda">Usuario: {{ usuario.username }}</mat-card-subtitle>
+
+  <mat-card-content>
+    <h3>Agregar Certificación</h3>
+  </mat-card-content>
+
+  <mat-form-field>
+    <mat-label>Nombre Certificado</mat-label>
+    <input matInput [(ngModel)]="nombreCertificado" name="nombreCertificado">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Fecha de Obtención</mat-label>
+    <input matInput [matDatepicker]="pickerObtencion" [max]="today" [(ngModel)]="fechaObtencion" name="fechaObtencion">
+    <mat-datepicker-toggle matSuffix [for]="pickerObtencion"></mat-datepicker-toggle>
+    <mat-datepicker #pickerObtencion></mat-datepicker>
+  </mat-form-field>
+
+  <mat-slide-toggle [(ngModel)]="tieneVencimiento" name="tieneVencimiento" labelPosition="before">
+    ¿El certificado tiene vencimiento?
+  </mat-slide-toggle>
+
+  <mat-form-field class="un-espacio-vertical" *ngIf="tieneVencimiento">
+    <mat-label>Fecha de Vencimiento</mat-label>
+    <input matInput [matDatepicker]="pickerVencimiento" [min]="fechaObtencion" [(ngModel)]="fechaVencimiento" name="fechaVencimiento">
+    <mat-datepicker-toggle matSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
+    <mat-datepicker #pickerVencimiento></mat-datepicker>
+  </mat-form-field>
+
+  <mat-card-actions>
+    <div class="fila-de-botones">
+      <button mat-stroked-button color="accent" (click)="guardar()">Guardar</button>
+      <button mat-stroked-button color="primary" (click)="limpiar()">Limpiar</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

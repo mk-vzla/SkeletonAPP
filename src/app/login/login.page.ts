@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  email: string = '';
+  username: string = '';
   password: string = '';
 
   constructor(
@@ -30,13 +30,13 @@ export class LoginPage implements OnInit {
 
 
   conectarseLogin() {
-    if (!this.email || !this.password) {
+    if (!this.username || !this.password) {
       this.mostrarAlerta('Por favor, completa todos los campos.');
       return;
     }
 
-    if (this.email.length <= 3 || this.email.length >= 9) {
-      this.mostrarAlerta('El email debe tener entre 4 y 8 caracteres.');
+    if (this.username.length <= 3 || this.username.length >= 9) {
+      this.mostrarAlerta('El username debe tener entre 4 y 8 caracteres.');
       return;
     }
 
@@ -46,8 +46,9 @@ export class LoginPage implements OnInit {
       return;
     }
     // Si las validaciones están bien, conectarse
-    console.log('CONECTANDO:', this.email);
-    this.router.navigate(['/home'], { state: { email: this.email } }).then(() => { location.reload(); });
+    console.log('CONECTANDO:', this.username);
+    localStorage.setItem('username', this.username);
+    this.router.navigate(['/home'], { state: { email: this.username } });//.then(() => { location.reload(); });
 
 
   }
