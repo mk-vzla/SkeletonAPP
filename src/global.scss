@@ -45,4 +45,27 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-app, ion-content {
+  --background: none;
+  position: relative;
+  min-height: 100vh;
+}
 
+ion-app::before, ion-content::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 750px;
+    background: url('../src/assets/images/skeleton2.jpg') no-repeat left bottom;
+    background-size: 100% 750px;
+    background-position: left bottom;
+    pointer-events: none;
+    z-index: -1;
+}
+
+ion-content {
+  background: transparent !important;
+}

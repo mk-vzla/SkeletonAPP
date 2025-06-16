@@ -210,7 +210,17 @@ export class DBTaskService {
     });
   }
 
-
+  async cerrarSesion(username: string) {
+    return this.bd.executeSql(
+      `UPDATE sesion_data SET active = 0 WHERE user_name = ?`,
+      [username]
+    ).then(() => {
+      this.mostrarToast('Sesión cerrada correctamente');
+      localStorage.removeItem('usuarioActivo'); // Limpiar el estado de conexión
+    }).catch(error => {
+      this.mostrarToast('Error al cerrar sesión: ' + error.message);
+    });
+  }
 
 
 
