@@ -41,7 +41,7 @@ export class CertificacionesComponent implements OnInit {
 
   async guardar() {
     if (!this.nombreCertificado || !this.fechaObtencion) {
-      alert('Por favor, completa el nombre del certificado y la fecha de obtención.');
+      alert('Por favor, completa los campos requeridos.');
       return;
     }
 
@@ -60,6 +60,7 @@ export class CertificacionesComponent implements OnInit {
     }
 
     try {
+      this.nombreCertificado = this.nombreCertificado.toUpperCase();
       await this.dbTaskService.agregarrCertificacion(
         this.usuario.username,
         this.nombreCertificado,
@@ -89,7 +90,7 @@ export class CertificacionesComponent implements OnInit {
         await this.dbTaskService.eliminarCertificacion(
           this.usuario.username,
           cert.nombre_certificado,
-          cert.fecha_obtencion // <-- Agrega este campo
+          cert.fecha_obtencion
         );
         await this.cargarCertificaciones();
       } catch (error) {

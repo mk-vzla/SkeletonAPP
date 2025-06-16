@@ -8,7 +8,7 @@
 
   <mat-form-field [ngClass]="{'shake': animarNombre}">
     <mat-label>Nombre</mat-label>
-    <input matInput [(ngModel)]="usuario.nombre" name="nombre" #nombreInput>
+    <input matInput [(ngModel)]="usuario.nombre" name="nombre" #nombreInput required>
   </mat-form-field>
 
   <mat-form-field [ngClass]="{'shake': animarApellido}">

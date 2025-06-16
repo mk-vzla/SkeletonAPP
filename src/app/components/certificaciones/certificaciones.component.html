@@ -8,14 +8,16 @@
 
   <mat-form-field>
     <mat-label>Nombre Certificado</mat-label>
-    <input matInput [(ngModel)]="nombreCertificado" name="nombreCertificado">
+    <input matInput [(ngModel)]="nombreCertificado" name="nombreCertificado" required>
+    <mat-error *ngIf="!nombreCertificado">Este campo es requerido</mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Fecha de Obtención</mat-label>
-    <input matInput [matDatepicker]="pickerObtencion" [max]="today" [(ngModel)]="fechaObtencion" name="fechaObtencion">
+    <input matInput [matDatepicker]="pickerObtencion" [max]="today" [(ngModel)]="fechaObtencion" name="fechaObtencion" required>
     <mat-datepicker-toggle matSuffix [for]="pickerObtencion"></mat-datepicker-toggle>
     <mat-datepicker #pickerObtencion></mat-datepicker>
+    <mat-error *ngIf="!fechaObtencion">Este campo es requerido</mat-error>
   </mat-form-field>
 
   <mat-slide-toggle [(ngModel)]="tieneVencimiento" name="tieneVencimiento" labelPosition="before">
@@ -38,7 +40,7 @@
 </mat-card>
 
 <ng-container *ngFor="let cert of certificaciones">
-  <mat-card class="la-tarjeta" appearance="outlined" style="position: relative;">
+  <mat-card class="la-tarjeta" appearance="outlined" style="margin-bottom: 16px; position: relative;">
     <button mat-icon-button color="warn"
             (click)="eliminarCertificacion(cert)"
             style="position: absolute; top: 8px; right: 8px;">
@@ -46,8 +48,16 @@
     </button>
     <mat-card-title>{{ cert.nombre_certificado }}</mat-card-title>
     <mat-card-content>
-      <p><strong>Fecha de obtención:</strong> {{ cert.fecha_obtencion }}</p>
-      <p *ngIf="cert.fecha_vencimiento"><strong>Fecha de vencimiento:</strong> {{ cert.fecha_vencimiento }}</p>
+      <ion-card style="margin-bottom: 8px; padding: 8px;">
+        <ion-card-content>
+          <strong>F. obtención:</strong> {{ cert.fecha_obtencion }}
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="cert.fecha_vencimiento" style="padding: 8px;">
+        <ion-card-content>
+          <strong>F. vencimiento:</strong> {{ cert.fecha_vencimiento }}
+        </ion-card-content>
+      </ion-card>
     </mat-card-content>
   </mat-card>
 </ng-container>

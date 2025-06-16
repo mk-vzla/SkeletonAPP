@@ -9,18 +9,27 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class AppComponent {
-  constructor(private menu: MenuController, private router: Router) {}
+  constructor(private menu: MenuController, private router: Router) { }
 
   cerrarMenu() {
     localStorage.removeItem('username');
     localStorage.removeItem('usuarioActivo'); // Limpiar el estado de conexión
     this.menu.close();
-    this.router.navigate(['/login']).then(() => {location.reload();});
+    this.router.navigate(['/login']).then(() => { location.reload(); });
   }
 
-  botonHome(){
+  botonHome() {
     this.menu.close();
     this.router.navigate(['/home']);//.then(() => {location.reload();});
+  }
 
+  botonAcercaDe() {
+    this.menu.close();
+    this.router.navigate(['/acercade']);
+  }
+
+  botonContacto() {
+    this.menu.close();
+    //this.router.navigate(['/contacto']);
   }
 }

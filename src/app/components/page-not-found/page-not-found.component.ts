@@ -11,8 +11,8 @@ export class PageNotFoundComponent  implements OnInit {
 
   constructor(private router: Router) { }
 
-  irALogin() {
-    this.router.navigate(['/login']);
+  irAHome() {
+    this.router.navigate(['/home']);
   }
   ngOnInit() {}
 

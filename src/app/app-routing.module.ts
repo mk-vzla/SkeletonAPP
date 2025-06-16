@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
 
   {
@@ -16,13 +16,20 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule), canActivate: [AuthGuard]
   },
   {
     path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule)
   },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: 'acercade',
+    loadChildren: () => import('./acercade/acercade.module').then(m => m.AcercadePageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: '**', component: PageNotFoundComponent
+  },
+
 ];
 
 @NgModule({
