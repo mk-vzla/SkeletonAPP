@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { DBTaskService } from '../services/dbtask.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,12 @@ export class LoginPage implements OnInit {
 
   username: string = '';
   password: string = '';
+  sesionActiva: number = 0; // 0 = no conectado, 1 = conectado
 
   constructor(
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private dbTaskService: DBTaskService
   ) { }
 
   async mostrarAlerta(mensaje: string) {
@@ -29,7 +32,7 @@ export class LoginPage implements OnInit {
   }
 
 
-  conectarseLogin() {
+  async conectarseLogin() {
     if (!this.username || !this.password) {
       this.mostrarAlerta('Por favor, completa todos los campos.');
       return;
@@ -45,11 +48,29 @@ export class LoginPage implements OnInit {
       this.password = '';
       return;
     }
+
+    // Validaciones pasadas, se puede proceder a conectarse
+    localStorage.setItem('usuarioActivo', 'true'); // Guardar el estado de conexión
+
     // Si las validaciones están bien, conectarse
     console.log('CONECTANDO:', this.username);
-    localStorage.setItem('username', this.username);
-    this.router.navigate(['/home'], { state: { email: this.username } });//.then(() => { location.reload(); });
 
+    try {
+      const usuario = await this.dbTaskService.validarUsuario(this.username, this.password);
+      if (usuario) {
+        this.sesionActiva = 1;
+        await this.dbTaskService.actualizarEstadoSesion(this.username, this.sesionActiva);
+        localStorage.setItem('usuarioActivo', 'true');
+        localStorage.setItem('username', this.username);
+        this.router.navigate(['/home'], { state: { email: this.username } });//.then(() => { location.reload(); });
+        //this.mostrarAlerta('Usuario conectado correctamente.');
+      } else {
+        this.mostrarAlerta('Usuario o contraseña incorrectos.');
+      }
+    } catch (error) {
+      const errorMsg = (error instanceof Error) ? error.message : String(error);
+      this.mostrarAlerta('Error al conectarse. ' + errorMsg);
+    }
 
   }
 

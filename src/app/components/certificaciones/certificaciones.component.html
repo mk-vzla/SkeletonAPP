@@ -36,3 +36,18 @@
     </div>
   </mat-card-actions>
 </mat-card>
+
+<ng-container *ngFor="let cert of certificaciones">
+  <mat-card class="la-tarjeta" appearance="outlined" style="position: relative;">
+    <button mat-icon-button color="warn"
+            (click)="eliminarCertificacion(cert)"
+            style="position: absolute; top: 8px; right: 8px;">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+    <mat-card-title>{{ cert.nombre_certificado }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Fecha de obtención:</strong> {{ cert.fecha_obtencion }}</p>
+      <p *ngIf="cert.fecha_vencimiento"><strong>Fecha de vencimiento:</strong> {{ cert.fecha_vencimiento }}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

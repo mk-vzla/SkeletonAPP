@@ -13,7 +13,14 @@ export class AppComponent {
 
   cerrarMenu() {
     localStorage.removeItem('username');
+    localStorage.removeItem('usuarioActivo'); // Limpiar el estado de conexión
     this.menu.close();
     this.router.navigate(['/login']).then(() => {location.reload();});
+  }
+
+  botonHome(){
+    this.menu.close();
+    this.router.navigate(['/home']);//.then(() => {location.reload();});
+
   }
 }

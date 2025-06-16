@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FormatearFechaPipe } from '../../pipes/formatear-fecha.pipe';
+import { DBTaskService } from '../../services/dbtask.service';
 
 // Clase Usuario 
 class Usuario {
@@ -10,7 +11,7 @@ class Usuario {
     public nombre: string = '',
     public apellido: string = '',
     public nivelEducacion: string = '',
-    public fechaNacimiento: string = ''
+    public fechaNacimiento: Date | string | null = null
   ) { }
 }
 
@@ -29,7 +30,9 @@ export class MisDatosComponent implements OnInit {
 
   private formatearFechaPipe = new FormatearFechaPipe();
 
-  constructor(private alertController: AlertController) {
+  constructor(private alertController: AlertController,
+    private dbTaskService: DBTaskService
+  ) {
     // Cargar username desde localStorage
     const usernameGuardado = localStorage.getItem('username');
     if (usernameGuardado) {
@@ -42,7 +45,21 @@ export class MisDatosComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.usuario.username) {
+      this.dbTaskService.obtenerDatosUsuario(this.usuario.username).then(datos => {
+        if (datos) {
+          this.usuario.nombre = datos.nombre || '';
+          this.usuario.apellido = datos.apellido || '';
+          this.usuario.nivelEducacion = datos.nivel_educacion || '';
+          // Convierte el string a Date si existe
+          this.usuario.fechaNacimiento = datos.fecha_nacimiento
+            ? new Date(datos.fecha_nacimiento)
+            : null;
+        }
+      });
+    }
+  }
 
   async mostrarAlerta(mensaje: string) {
     const alerta = await this.alertController.create({
@@ -53,16 +70,16 @@ export class MisDatosComponent implements OnInit {
     await alerta.present();
   }
 
-  mostrar() {
-    if (!this.usuario.nombre || !this.usuario.apellido) {
-      this.mostrarAlerta('Por favor, complete los campos de nombre y apellido.');
-      return;
-    }
-    const nombreInitCap = this.usuario.nombre.charAt(0).toUpperCase() + this.usuario.nombre.slice(1).toLowerCase();
-    const apellidoInitCap = this.usuario.apellido.charAt(0).toUpperCase() + this.usuario.apellido.slice(1).toLowerCase();
-    const fechaFormateada = this.formatearFechaPipe.transform(this.usuario.fechaNacimiento);
-    this.mostrarAlerta('Su nombre es: ' + nombreInitCap + ' ' + apellidoInitCap + ' ' + fechaFormateada);
-  }
+  // mostrar() {
+  //   if (!this.usuario.nombre || !this.usuario.apellido) {
+  //     this.mostrarAlerta('Por favor, complete los campos de nombre y apellido.');
+  //     return;
+  //   }
+  //   const nombreInitCap = this.usuario.nombre.charAt(0).toUpperCase() + this.usuario.nombre.slice(1).toLowerCase();
+  //   const apellidoInitCap = this.usuario.apellido.charAt(0).toUpperCase() + this.usuario.apellido.slice(1).toLowerCase();
+  //   const fechaFormateada = this.formatearFechaPipe.transform(this.usuario.fechaNacimiento);
+  //   this.mostrarAlerta('Su nombre es: ' + nombreInitCap + ' ' + apellidoInitCap + ' ' + fechaFormateada);
+  // }
 
   limpiar() {
     this.usuario.nombre = '';
@@ -77,5 +94,41 @@ export class MisDatosComponent implements OnInit {
       this.animarNombre = false;
       this.animarApellido = false;
     }, 1000);
+  }
+
+  async guardar() {
+    if (!this.usuario.nombre) {
+      this.mostrarAlerta('Por favor, complete el campo de nombre.');
+      return;
+    }
+
+    if (this.usuario.nombre.length < 3) {
+      this.mostrarAlerta('El nombre debe tener al menos 3 caracteres.');
+      return;
+    }
+
+    // GUARDAR TODO EN LA BASE DE DATOS
+    try {
+      // Convierte Date a string yyyy-mm-dd si es necesario
+      let fechaNacimiento = this.usuario.fechaNacimiento;
+      if (fechaNacimiento instanceof Date) {
+        fechaNacimiento = fechaNacimiento.toISOString().split('T')[0];
+      }
+      // Transformar primera letra a mayúscula y el resto a minúscula
+      const nombreInitCap = this.usuario.nombre.charAt(0).toUpperCase() + this.usuario.nombre.slice(1).toLowerCase();
+      const apellidoInitCap = this.usuario.apellido ? this.usuario.apellido.charAt(0).toUpperCase() + this.usuario.apellido.slice(1).toLowerCase() : '';
+
+      await this.dbTaskService.actualizarDatosUsuario(
+        this.usuario.username,
+        nombreInitCap,
+        apellidoInitCap,
+        this.usuario.nivelEducacion,
+        fechaNacimiento || ''
+      );
+      //this.mostrarAlerta('Datos guardados correctamente.');
+    } catch (error) {
+      console.error('Error al guardar los datos:', error);
+      this.mostrarAlerta('Error al guardar los datos. Por favor, inténtelo de nuevo más tarde.');
+    }
   }
 }

@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large"><ion-icon class="icono-principio" name="person-add-outline"></ion-icon>Registro</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <br>
+    <ion-list>
+      <ion-item>
+        <ion-input label="Username: " [(ngModel)]="username" type="text" name="username" placeholder="Ej. juan" maxlength="8"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Password: " [(ngModel)]="password" type="password" name="password" placeholder="4 números"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Repetir Password: " [(ngModel)]="repeatPassword" type="password" name="repeatPassword" placeholder="Repite la contraseña"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button color="tertiary" expand="block" fill="outline" (click)="registrarse()">Registrarse</ion-button>
+    <ion-button expand="block" fill="clear" color="primary" routerLink="/login">
+      Volver al login
+    </ion-button>
+  </ion-card>
+</ion-content>
