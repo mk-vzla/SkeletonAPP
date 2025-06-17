@@ -28,7 +28,6 @@ export class LoginPage implements OnInit {
       buttons: ['OK']
     });
     await alerta.present();
-
   }
 
 
@@ -55,6 +54,7 @@ export class LoginPage implements OnInit {
     // Si las validaciones están bien, conectarse
     console.log('CONECTANDO:', this.username);
 
+    // Llamar al servicio para validar el usuario
     try {
       const usuario = await this.dbTaskService.validarUsuario(this.username, this.password);
       if (usuario) {
@@ -71,7 +71,6 @@ export class LoginPage implements OnInit {
       const errorMsg = (error instanceof Error) ? error.message : String(error);
       this.mostrarAlerta('Error al conectarse. ' + errorMsg);
     }
-
   }
 
   noConectarseLogin() {
